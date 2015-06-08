@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <div class="row">
+        <div class="col-lg-9">
+            <h3 class="modal-title">{{title}}</h3>
+        </div>
+        <div class="col-lg-3">
+            <h5 class="pull-right"><strong class="text-info">BLUE</strong> means required</h5>
+        </div>
+    </div>
+</div>
+
+<div class="modal-body">
+
+
+    <form>
+        <!--Loop over all fields in the data model-->
+        <div class="form-group" ng-class="{'has-error' : !field.valid}" ng-repeat="field in fields"
+             ng-if="field.display">
+
+            <!--for boolean attributes-->
+            <input ng-if="field.type == 'checkbox'" type="checkbox" ng-model="field.value">
+
+            <!--Field Label-->
+            <label ng-class="{'text-info' : field.required && field.valid, 'text-default' : !field.required && field.valid , 'text-danger': !field.valid}"
+                   for="{{field.name}}">{{field.displayName}} </label>
+
+            <!--Error message-->
+            <div ng-if="field.hasOwnProperty('errorMessage')" class="alert alert-danger alert-dismissible fade in" role="alert">
+                <strong>Error!</strong> {{field.errorMessage}}
+            </div>
+
+            <!--Create an input field for text and number attributes-->
+            <input ng-if="field.type == 'text' || field.type == 'number'" type="{{field.type}}" class="form-control"
+                   placeholder="{{field.placeholder}}" id="{{field.name}}" ng-model="field.value">
+
+            <!--Create a dropdown field for dropdown attributes using dropdownOptions attribute-->
+            <select class="form-control" ng-if="field.type == 'dropdown'" data-ng-model="field.value" data-ng-options="item for item in field.dropdownOptions">
+            </select>
+
+        </div>
+    </form>
+</div>
+
+<!--modal footer-->
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="ok(fields)">OK</button>
+    <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>
