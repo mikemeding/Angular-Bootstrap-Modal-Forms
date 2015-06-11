@@ -1,4 +1,5 @@
 # Using Angular Data Driven Modals
+![Screenshot](readmeImages/Screenshot.png)
 ### Requirements
 * A good working knowledge of [Angular.js](https://angularjs.org/) and its different componenets.
 * A firm grasp of how [Bootstrap](getbootstrap.com) works. Particularly what modals are and how they work.
