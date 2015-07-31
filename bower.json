@@ -1,0 +1,32 @@
+{
+  "name": "anbomofo",
+  "version": "0.2.0",
+  "homepage": "https://github.com/mikemeding/Angular-Bootstrap-Modal-Forms",
+  "authors": [
+    "mikemeding <mikeymeding@gmail.com>"
+  ],
+  "description": "Angular bootstrap modal library for automatically creating and deploying forms in modals",
+  "main": "anbomofo.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "AngularJS",
+    "Bootstrap",
+    "Forms",
+    "Data",
+    "Driven",
+    "Forms",
+    "Automatic",
+    "form",
+    "generation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

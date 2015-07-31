@@ -30,6 +30,7 @@
                 }
             }
             if (compileError) {
+                console.error("Model compile error. Incorrectly formatted model.");
                 return {};
             } else {
                 return addDefaultFields(model); // add default fields and return
@@ -62,10 +63,19 @@
                     field['placeholder'] = 'Please enter a value';
                 }
                 if (field['type'] === 'dropdown') { // if our type is a dropdown
-                    field['value'] = field['dropdownOptions'][0]; // its inital value is the first item in dropdown options
+                    if (!field.hasOwnProperty('value')) { // if no default value is given
+                        field['value'] = field['dropdownOptions'][0]; // its inital value is the first item in dropdown option
+                    }
                 }
                 if (field['type'] === 'checkbox') { // if our type is a checkbox
-                    field['value'] = false;
+                    if (!field.hasOwnProperty('value')) {
+                        field['value'] = false; // default is false if nothing else
+                    }
+                }
+                if (field['type'] === 'datetime') { // if our type is a date picker
+                    if (!field.hasOwnProperty('value')) {
+                        field.value = new Date(); // default is the current time
+                    }
                 }
             }
             return model;
@@ -176,9 +186,6 @@
             return fields;
         };
 
-
-    }
-    ])
-    ;
+    }]);
 
 }());

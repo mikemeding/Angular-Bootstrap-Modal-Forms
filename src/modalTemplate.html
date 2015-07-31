@@ -37,6 +37,9 @@
             <select class="form-control" ng-if="field.type == 'dropdown'" data-ng-model="field.value" data-ng-options="item for item in field.dropdownOptions">
             </select>
 
+            <!--for datetime picker-->
+            <input ng-if="field.type == 'datetime'" class="form-control" type="datetime-local" ng-model="field.value">
+
         </div>
     </form>
 </div>

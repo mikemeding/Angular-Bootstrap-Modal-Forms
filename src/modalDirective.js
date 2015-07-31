@@ -6,18 +6,10 @@
     var app = angular.module("eos");
     app.directive('modal', function () {
         /**
-         * Modal Directive:
-         * This directive requires that you pass a service which implements these methods and follows the following instructions:
-         *
-         * PULL IN SERVICE
-         * Your service must bring in the ModalService dependency which contains the model compiler
-         *
          * IMPLEMENT METHODS
          * JSON getModel(); // will return the model
-         * JSON getAllData(); // will return an array of objects which correspond to the model
-         * void addData(JSON); // adds data to your internal data array
          *
-         * MODEL STRUCTURE
+         * BASIC MODEL STRUCTURE
          * var model = {
              fields: [
          *        {name: "id", display: false},
@@ -65,7 +57,7 @@
                 '$scope', '$attrs', '$injector', '$modal', function ($scope, $attrs, $injector, $modal) {
                     // inject service and get button label for this scope
                     $scope.dataServiceName = $attrs.ngService;
-                    //$scope.dataService = $injector.get($attrs.ngService);
+                    $scope.dataService = $injector.get($scope.dataServiceName);
 
                     /**
                      * Opens the modal
@@ -74,28 +66,63 @@
                      */
                     $scope.openModal = function () {
 
-                        // this is simalar to routes except with dynamic templates.
-                        var modalInstance = $modal.open({
-                            templateUrl: 'app/private/modules/modal/modalTemplate.html',
-                            controller: 'AddModalInstanceController',
-                            size: 'lg',
-                            resolve: { // this resolves the local vars of Instance Ctrl
-                                ngModel: function () {
-                                    return $scope.ngModel;
-                                },
-                                dataServiceName: function () { // send the modal instance the name of the service that it must inject
-                                    return $scope.dataServiceName;
+                        function onwards() {
+                            // this is simalar to routes except with dynamic templates.
+                            $modal.open({
+                                templateUrl: 'app/private/modules/modal/modalTemplate.html',
+                                //template: '<div class="modal-header">     <div class="row">         <div class="col-lg-9">             <h3 class="modal-title">{{title}}</h3>         </div>         <div class="col-lg-3">             <h5 class="pull-right"><strong class="text-info">BLUE</strong> means required</h5>         </div>     </div> </div>  <div class="modal-body">       <form>         <!--Loop over all fields in the data model-->         <div class="form-group" ng-class="{\'has-error\' : !field.valid}" ng-repeat="field in fields"              ng-if="field.display">              <!--for boolean attributes-->             <input ng-if="field.type == \'checkbox\'" type="checkbox" ng-model="field.value">              <!--Field Label-->             <label ng-class="{\'text-info\' : field.required && field.valid, \'text-default\' : !field.required && field.valid , \'text-danger\': !field.valid}"                    for="{{field.name}}">{{field.displayName}} </label>              <!--Error message-->             <div ng-if="field.hasOwnProperty(\'errorMessage\')" class="alert alert-danger alert-dismissible fade in" role="alert">                 <strong>Error!</strong> {{field.errorMessage}}             </div>              <!--Create an input field for text and number attributes-->             <input ng-if="field.type == \'text\' || field.type == \'number\'" type="{{field.type}}" class="form-control"                    placeholder="{{field.placeholder}}" id="{{field.name}}" ng-model="field.value">              <!--Create a dropdown field for dropdown attributes using dropdownOptions attribute-->             <select class="form-control" ng-if="field.type == \'dropdown\'" data-ng-model="field.value" data-ng-options="item for item in field.dropdownOptions">             </select>              <!--for datetime picker-->             <input ng-if="field.type == \'datetime\'" class="form-control" type="datetime-local" ng-model="field.value">          </div>     </form> </div>  <!--modal footer--> <div class="modal-footer">     <button type="submit" class="btn btn-primary" ng-click="ok(fields)">OK</button>     <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button> </div>',
+                                controller: 'AddModalInstanceController',
+                                size: 'lg',
+                                resolve: { // this resolves the local vars of Instance Ctrl
+                                    ngModel: function () {
+                                        return $scope.ngModel;
+                                    },
+                                    dataServiceName: function () { // send the modal instance the name of the service that it must inject
+                                        return $scope.dataServiceName;
+                                    }
                                 }
-                            }
+                            });
+                        }
 
-                        });
+                        /**
+                         * if preClick exists execute it
+                         */
+                        if (typeof $scope.dataService.preClick === "function") { // if preclick function exists
+                            $scope.dataService.preClick();
+                        }
+
+
+                        function myTimeout() {
+                            setTimeout(function () {
+                                if (!$scope.ready) {
+                                    $scope.ready = $scope.dataService.modelReady(); // if still not ready update
+                                    myTimeout(); // run again
+                                } else {
+                                    onwards(); // continue execution.
+                                }
+                            }, 100); // 100ms wait
+                        }
+
+                        /**
+                         * get relevant data for building our modal from our injected service
+                         * and do not return until that data is ready
+                         */
+                        if (typeof $scope.dataService.modelReady === 'function') {
+                            $scope.ready = $scope.dataService.modelReady();
+                            myTimeout(); // kick off synchronous timer
+                        } else {
+                            onwards(); // ignore and continue
+                        }
+
+
                     };
-                }],
-            link: function ($scope, element, attributes, ctrl) {
+                }
+            ],
+            link: function compile($scope, element, $attrs, ctrl) {
+
                 // bind the click handler to the element which has our modal-add attribute
                 element.bind('click', function (e) {
-                    //console.log(e);
-                    $scope.openModal();
+                    $scope.openModal(); // just open the stupid modal
                 });
             }
         }
@@ -108,9 +135,7 @@
             // using service name to inject the service to our instance controller.
             var dataService = $injector.get(dataServiceName);
 
-            // get relevant data for building our modal from our injected service
             var model = dataService.getModel();
-
             // extract relevant settings
             $scope.fields = model['fields'];
             if (ngModel === undefined) {
@@ -144,7 +169,9 @@
                         //console.error('invalid states exist');
                         $scope.fields = fields;
                     } else {
-                        $scope.settings['callback'](newDataPoint); // fire off successful callback function
+                        if ($scope.settings.hasOwnProperty('callback')) {
+                            $scope.settings['callback'](newDataPoint); // fire off successful callback function
+                        }
                         $modalInstance.close(); // this causes result promise to succeed and modal to close and reset
                     }
                 };
@@ -167,7 +194,5 @@
                 $scope.fields = ModalService.resetModel(dataService.getModel()); // Reset modal
             })
 
-
         }]);
-
 }());

@@ -1,10 +1,39 @@
-# Using Angular Data Driven Modals
+# AnBoMoFo (Angular Bootstrap Modal Forms)
+A simple, ultra-lighweight angular service which automatically generates data forms and callbacks using simple JSON.
+
+# Installation
+
+Installation is easy. The only project requirements are AngularJS and AngularBootstrapUI.
+
+#### Install with Bower
+```sh
+$ bower install anbomofo
+```
+
+### Adding dependency to your project
+
+When bower is done downloading all of the required files all thats left to do is add dependencies on your main AngularJS module.
+
+Add the flavor of javascript file you would like. Minified or unminified based on your project.
+```html
+<script src="bower_components/anbomofo/anbomofo.min.js"></script>
+```
+
+Include AngularJS dependency
+```js
+angular.module('myModule', ['autoModals']);
+```
+This was tested to work with the following browsers:
+* Chrome
+* (I should probobly test this with more browsers)
+
+# Usage
+
 ![Screenshot](readmeImages/Screenshot.png)
-### Requirements
+### Knowledge Requirements
 * A good working knowledge of [Angular.js](https://angularjs.org/) and its different componenets.
 * A firm grasp of how [Bootstrap](getbootstrap.com) works. Particularly what modals are and how they work.
-* Knowing how to write JSON is also helpful but not nessasarily required.
-
+* Knowing how to write JSON is also helpful but not nessasarily required. JSON is a very simple format to understand.
 
 ## Brief Overview
 
@@ -14,36 +43,17 @@ When designing a [Angular.js](https://angularjs.org/) application that handles a
 
 ### Basic procedure
 
-* Include this library as a part of your project (and change app name)
-* Implement a AngularJS service with the ModalService dependency
+* Include this library as a part of your project (Described above)
+* Add this library as a dependency to your project (Described above)
 * Define a model in this service and allow access to it through a getModel() function
 * Define a submit method in this service to gain access to the outgoing data
 * Compile your this model using the compileModel() method
 * Attach the modal to an object in your DOM and PRESTO!
 
-## Modal Directive
-First off, you must include the [modalDirective.js](modalDirective.js) and [modalService.js](modalService.js) file into your project,
-```html
-<script src="modules/modalService.js"></script>
-<script src="modules/modalDirective.js"></script>
-```
-By convention I would place these into their own modules folder but this is your choice.
-
-### Note
-You may need to modify the app name to match yours in the [modalDirective.js](modalDirective.js).
          
 ## Include Service
 To implement your own data driven modal you need to have a service to support it. A full example of which can be seen in the [modalDataServiceExample.js](modalDataServiceExample.js) file.
 
-         
-## Implement Method
-```javascript
-// this method must be implemented in your angular service
-this.getModel = function () {
-	return model;
-};
-```
-As AngularJS has no means of creating interfaces as in Java you must remember to implement this method on your own. Its function is straightforward as it simply allows public access to your local model variable.
          
 ## Model Structure
 ```javascript
@@ -75,10 +85,19 @@ var model = {
 ```
 Remember, a full example of this can be found in the [modalDataServiceExample.js](modelDataServiceExample.js) file.
          
+## Implement Method
+```javascript
+// this method must be implemented in your angular service
+this.getModel = function () {
+	return model;
+};
+```
+As AngularJS has no means of creating interfaces as in Java you must remember to implement this method on your own. Its function is straightforward as it simply allows public access to your local model variable.
+         
 ## Compile Model
 model = ModalService.compileModel(model);
          
-## Attach to DOM
+## Attach modal to DOM
 ```html
 <button class="btn btn-primary" modal ng-service="PanelDataService">Add Panel</button>
 ```
