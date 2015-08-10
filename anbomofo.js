@@ -1,41 +1,35 @@
 /**
- * Created by mike on 7/31/15.
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Mike Meding
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Change Log:
+ * Mon Aug 10 2015 Mike Meding <mikeymeding@gmail.com>
+ * - initial beta version release
  */
 (function () {
     "use strict";
     var module = angular.module("autoModals", []);
     module.directive('modal', function () {
         /**
-         * IMPLEMENT METHODS
-         * JSON getModel(); // will return the model
-         *
-         * MODEL STRUCTURE
-         * var model = {
-             fields: [
-         *        {name: "id", display: false},
-         *        {name: "name", displayName: "Name", placeholder: "Panel [a,b,etc...]", type: "text", required: true},
-         *        {name: "mac", displayName: "MAC", placeholder: "0x36000...", type: "text", required: true}
-         *        ],
-         *   addModalSettings: {
-         *       title: 'Add New Panel',
-         *       buttonLabel: 'Add Panel',
-         *       callback: this.onSubmit
-         *   },
-         *   editModalSettings: {
-         *      ...
-         *   }
-         * };
-         *
-         * COMPILE MODEL
-         * model = ModalService.compileModel(model);
-         *
-         * ATTACH TO DOM
-         * <button class="btn btn-primary" modal ng-service="PanelDataService">Add Panel</button>
-         *
-         * RECOMMENDED
-         * Hanging the rest of the data used to drive around your page using your new service is recommended as your
-         * modals will stay up to date with your data.
-         *
          * Credits and Examples used:
          * http://stackoverflow.com/questions/14115701/angularjs-create-a-directive-that-uses-ng-model // directives that use ng-model
          * http://stackoverflow.com/questions/20033493/angularjs-passing-service-as-an-argument-to-directive // for argument passing
@@ -44,7 +38,6 @@
          * http://stackoverflow.com/questions/16529825/angularjs-ngclass-conditional // angular conditional classes for template
          * http://stackoverflow.com/questions/12139152/how-to-set-the-value-property-in-angularjs-ng-options // using ngOptions for select tags
          * http://odetocode.com/blogs/scott/archive/2013/06/19/using-ngoptions-in-angularjs.aspx // using ngOptions for select tags
-         *
          */
 
         return {
@@ -69,7 +62,7 @@
                         function onwards() {
                             // this is simalar to routes except with dynamic templates.
                             $modal.open({
-                                //templateUrl: 'app/private/modules/modal/modalTemplate.html',
+                                // this template is constructed from modalTemplate.html by converting the HTML into a giant string.
                                 template: '<div class="modal-header">     <div class="row">         <div class="col-lg-9">             <h3 class="modal-title">{{title}}</h3>         </div>         <div class="col-lg-3">             <h5 class="pull-right"><strong class="text-info">BLUE</strong> means required</h5>         </div>     </div> </div>  <div class="modal-body">       <form>         <!--Loop over all fields in the data model-->         <div class="form-group" ng-class="{\'has-error\' : !field.valid}" ng-repeat="field in fields"              ng-if="field.display">              <!--for boolean attributes-->             <input ng-if="field.type == \'checkbox\'" type="checkbox" ng-model="field.value">              <!--Field Label-->             <label ng-class="{\'text-info\' : field.required && field.valid, \'text-default\' : !field.required && field.valid , \'text-danger\': !field.valid}"                    for="{{field.name}}">{{field.displayName}} </label>              <!--Error message-->             <div ng-if="field.hasOwnProperty(\'errorMessage\')" class="alert alert-danger alert-dismissible fade in" role="alert">                 <strong>Error!</strong> {{field.errorMessage}}             </div>              <!--Create an input field for text and number attributes-->             <input ng-if="field.type == \'text\' || field.type == \'number\'" type="{{field.type}}" class="form-control"                    placeholder="{{field.placeholder}}" id="{{field.name}}" ng-model="field.value">              <!--Create a dropdown field for dropdown attributes using dropdownOptions attribute-->             <select class="form-control" ng-if="field.type == \'dropdown\'" data-ng-model="field.value" data-ng-options="item for item in field.dropdownOptions">             </select>              <!--for datetime picker-->             <input ng-if="field.type == \'datetime\'" class="form-control" type="datetime-local" ng-model="field.value">          </div>     </form> </div>  <!--modal footer--> <div class="modal-footer">     <button type="submit" class="btn btn-primary" ng-click="ok(fields)">OK</button>     <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button> </div>',
                                 controller: 'AddModalInstanceController',
                                 size: 'lg',

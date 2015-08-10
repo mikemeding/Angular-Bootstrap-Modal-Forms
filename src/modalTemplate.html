@@ -1,3 +1,31 @@
+<!--
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Mike Meding
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Change Log:
+ * Mon Aug 10 2015 Mike Meding <mikeymeding@gmail.com>
+ * - initial beta version release
+-->
+
 <div class="modal-header">
     <div class="row">
         <div class="col-lg-9">
@@ -10,7 +38,6 @@
 </div>
 
 <div class="modal-body">
-
 
     <form>
         <!--Loop over all fields in the data model-->
@@ -25,7 +52,8 @@
                    for="{{field.name}}">{{field.displayName}} </label>
 
             <!--Error message-->
-            <div ng-if="field.hasOwnProperty('errorMessage')" class="alert alert-danger alert-dismissible fade in" role="alert">
+            <div ng-if="field.hasOwnProperty('errorMessage')" class="alert alert-danger alert-dismissible fade in"
+                 role="alert">
                 <strong>Error!</strong> {{field.errorMessage}}
             </div>
 
@@ -34,7 +62,8 @@
                    placeholder="{{field.placeholder}}" id="{{field.name}}" ng-model="field.value">
 
             <!--Create a dropdown field for dropdown attributes using dropdownOptions attribute-->
-            <select class="form-control" ng-if="field.type == 'dropdown'" data-ng-model="field.value" data-ng-options="item for item in field.dropdownOptions">
+            <select class="form-control" ng-if="field.type == 'dropdown'" data-ng-model="field.value"
+                    data-ng-options="item for item in field.dropdownOptions">
             </select>
 
             <!--for datetime picker-->
