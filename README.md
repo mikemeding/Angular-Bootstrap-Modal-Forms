@@ -47,7 +47,7 @@ When designing a [Angular.js](https://angularjs.org/) application that handles a
 * Add this library as a dependency to your project (Described above)
 * Define a model in this service and allow access to it through a getModel() function
 * Define a submit method in this service to gain access to the outgoing data
-* Compile your this model using the compileModel() method
+* Compile your model using the compileModel() method
 * Attach the modal to an object in your DOM and PRESTO!
 
          
@@ -104,4 +104,4 @@ model = ModalService.compileModel(model);
 This directive uses the existance of the the ng-model="" attribute as its means of differentiating between a modal that is in add mode and edit mode.
 
 
-** I will be creating a plnkr soon to show a working example of this code. **
+A full plunker is now available for a basic example of this library [here](http://embed.plnkr.co/ETaJ3W/preview)
