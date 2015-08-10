@@ -1,6 +1,9 @@
 # AnBoMoFo (Angular Bootstrap Modal Forms)
 A simple, ultra-lightweight angular service which automatically generates data forms and callbacks using simple JSON.
 
+# Live Example
+A basic plunker example of this library is now available [here](http://embed.plnkr.co/ETaJ3W/preview)
+
 # Installation
 
 Installation is easy. The only project requirements are AngularJS, AngularBootstrapUI, and UIRouter.
@@ -82,7 +85,6 @@ var model = {
 
 // other getters and setters here
 ```
-Remember, a full plunker is now available for a basic example of this library [here](http://embed.plnkr.co/ETaJ3W/preview)
          
 ## Implement Method
 ```javascript
@@ -94,8 +96,10 @@ this.getModel = function () {
 As AngularJS has no means of creating interfaces as in Java you must remember to implement this method on your own. Its function is straightforward as it simply allows public access to your local model variable.
          
 ## Compile Model
+```javascript
 model = ModalService.compileModel(model);
-         
+```         
+
 ## Attach modal to DOM
 ```html
 <button class="btn btn-primary" modal ng-service="PanelDataService">Add Panel</button>
@@ -103,4 +107,4 @@ model = ModalService.compileModel(model);
 This directive uses the existance of the the ng-model="" attribute as its means of differentiating between a modal that is in add mode and edit mode.
 
 
-A full plunker is now available for a basic example of this library [here](http://embed.plnkr.co/ETaJ3W/preview)
+Remember, a basic plunker example of this library is now available [here](http://embed.plnkr.co/ETaJ3W/preview)
