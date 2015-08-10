@@ -1,9 +1,9 @@
 # AnBoMoFo (Angular Bootstrap Modal Forms)
-A simple, ultra-lighweight angular service which automatically generates data forms and callbacks using simple JSON.
+A simple, ultra-lightweight angular service which automatically generates data forms and callbacks using simple JSON.
 
 # Installation
 
-Installation is easy. The only project requirements are AngularJS and AngularBootstrapUI.
+Installation is easy. The only project requirements are AngularJS, AngularBootstrapUI, and UIRouter.
 
 #### Install with Bower
 ```sh
@@ -32,14 +32,14 @@ This was tested to work with the following browsers:
 ![Screenshot](readmeImages/Screenshot.png)
 ### Knowledge Requirements
 * A good working knowledge of [Angular.js](https://angularjs.org/) and its different componenets.
-* A firm grasp of how [Bootstrap](getbootstrap.com) works. Particularly what modals are and how they work.
-* Knowing how to write JSON is also helpful but not nessasarily required. JSON is a very simple format to understand.
+* A firm grasp of how [Bootstrap](http://www.getbootstrap.com) works. Particularly what modals are and how they work.
+* Knowing how to write JSON is also helpful.
 
 ## Brief Overview
 
 ### Why?
 
-When designing a [Angular.js](https://angularjs.org/) application that handles an abundance of form data it can quickly become unmanageable. If you are like me and have a bunch of forms that only differ by a fiew fields it can be infuriating to have to write two separate form templates each with their own set of control methods. This becomes even more of a nightmare when you have 20+ different forms that each have to be collected and updated from a database. In comes this handy library! Angular-Data-Driven-Modals allows you to specify only what the data looks like and like magic you get both a means of adding and updating your data in convient [Bootstrap](getbootstrap.com) modal forms.
+When designing a [Angular.js](https://angularjs.org/) application that handles an abundance of form data it can quickly become unmanageable. If you are like me and have a bunch of forms that only differ by a fiew fields it can be infuriating to have to write two separate form templates each with their own set of control methods. This becomes even more of a nightmare when you have 20+ different forms that each have to be collected and updated from a database. In comes this handy library! Angular-Data-Driven-Modals allows you to specify only what the data looks like and like magic you get both a means of adding and updating your data in convient [Bootstrap](http://www.getbootstrap.com) modal forms.
 
 ### Basic procedure
 
@@ -52,8 +52,7 @@ When designing a [Angular.js](https://angularjs.org/) application that handles a
 
          
 ## Include Service
-To implement your own data driven modal you need to have a service to support it. A full example of which can be seen in the [modalDataServiceExample.js](modalDataServiceExample.js) file.
-
+To implement your own data driven modal you need to have a service to support it. The structure of which is as follows,
          
 ## Model Structure
 ```javascript
@@ -83,7 +82,7 @@ var model = {
 
 // other getters and setters here
 ```
-Remember, a full example of this can be found in the [modalDataServiceExample.js](modelDataServiceExample.js) file.
+Remember, a full plunker is now available for a basic example of this library [here](http://embed.plnkr.co/ETaJ3W/preview)
          
 ## Implement Method
 ```javascript
