@@ -2,11 +2,11 @@
 A simple, ultra-lightweight AngularJS service which automatically generates data forms with callbacks using a simple JSON model.
 
 # Live Example
-A basic plunker example of this library is now available [here](http://embed.plnkr.co/ETaJ3W/preview)
+A basic plunker example of this library is now available <a href="http://embed.plnkr.co/ETaJ3W/preview" target="_blank">here</a>
 
 # Installation
 
-Installation is easy. The only project requirements are AngularJS, AngularBootstrapUI, and UIRouter.
+The only project requirements are AngularJS, AngularBootstrapUI, and UIRouter.
 
 #### Install with Bower
 ```sh
@@ -106,5 +106,4 @@ model = ModalService.compileModel(model);
 ```
 This directive uses the existance of the the ng-model="" attribute as its means of differentiating between a modal that is in add mode and edit mode.
 
-
-Remember, a basic plunker example of this library is now available [here](http://embed.plnkr.co/ETaJ3W/preview)
+Remember, a basic plunker example of this library is now available <a href="http://embed.plnkr.co/ETaJ3W/preview" target="_blank">here</a>
