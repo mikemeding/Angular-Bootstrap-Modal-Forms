@@ -1,5 +1,7 @@
 /**
- * Created by mike on 5/26/15.
+ * Changelog
+ * Mon Aug 10 2015 Mike Meding <mikeymeding@gmail.com>
+ * - inital beta version release
  */
 (function () {
     "use strict";
