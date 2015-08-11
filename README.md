@@ -67,12 +67,12 @@ var model = {
 	// The structure of the input fields
 	fields: [
 		{name: "id", display: false}, // this item is preserved but not displayed
-        // follows a simalar naming patter as the input fields would
+        	// follows a simalar naming pattern as the input fields would
 		{name: "name", displayName: "Name", placeholder: "Panel [a,b,etc...]", type: "text", required: true},
 		{name: "mac", displayName: "MAC", placeholder: "0x36000...", type: "text", required: true},        
         ...
 	],
-    // Add mode settings
+    	// Add mode settings
 	addModalSettings: {
 		title: 'Add New Panel',
         // the submission callback function above. All fields are placed into a new object
