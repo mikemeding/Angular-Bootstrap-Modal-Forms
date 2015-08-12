@@ -27,8 +27,8 @@ Include AngularJS dependency
 angular.module('myModule', ['autoModals']);
 ```
 This was tested to work with the following browsers:
-* Chrome
-* (I should probobly test this with more browsers)
+* Chrome [43.0.2357.134 (Official Build) (64-bit)]
+* Firefox [30.0 Latest Linux Release]
 
 # Usage
 
