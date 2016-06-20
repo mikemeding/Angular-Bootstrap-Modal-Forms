@@ -27,7 +27,14 @@
  */
 (function () {
     "use strict";
-    var module = angular.module("autoModals", []);
+    // =======================================================
+    // config
+    // =======================================================
+    var module = angular.module('autoModals', ['ui.bootstrap', 'ui.router']);
+
+    // =======================================================
+    // directive
+    // =======================================================
     module.directive('modal', function () {
         /**
          * Credits and Examples used:
@@ -47,7 +54,7 @@
                 ngModel: '=' // puts object directly in scope
             },
             controller: [
-                '$scope', '$attrs', '$injector', '$modal', function ($scope, $attrs, $injector, $modal) {
+                '$scope', '$attrs', '$injector', '$uibModal', function ($scope, $attrs, $injector, $uibModal) {
                     // inject service and get button label for this scope
                     $scope.dataServiceName = $attrs.ngService;
                     $scope.dataService = $injector.get($scope.dataServiceName);
@@ -60,8 +67,7 @@
                     $scope.openModal = function () {
 
                         function onwards() {
-                            // this is simalar to routes except with dynamic templates.
-                            $modal.open({
+                            $uibModal.open({
                                 // this template is constructed from modalTemplate.html by converting the HTML into a giant string.
                                 template: '<div class="modal-header">     <div class="row">         <div class="col-lg-9">             <h3 class="modal-title">{{title}}</h3>         </div>         <div class="col-lg-3">             <h5 class="pull-right"><strong class="text-info">BLUE</strong> means required</h5>         </div>     </div> </div>  <div class="modal-body">       <form>         <!--Loop over all fields in the data model-->         <div class="form-group" ng-class="{\'has-error\' : !field.valid}" ng-repeat="field in fields"              ng-if="field.display">              <!--for boolean attributes-->             <input ng-if="field.type == \'checkbox\'" type="checkbox" ng-model="field.value">              <!--Field Label-->             <label ng-class="{\'text-info\' : field.required && field.valid, \'text-default\' : !field.required && field.valid , \'text-danger\': !field.valid}"                    for="{{field.name}}">{{field.displayName}} </label>              <!--Error message-->             <div ng-if="field.hasOwnProperty(\'errorMessage\')" class="alert alert-danger alert-dismissible fade in" role="alert">                 <strong>Error!</strong> {{field.errorMessage}}             </div>              <!--Create an input field for text and number attributes-->             <input ng-if="field.type == \'text\' || field.type == \'number\'" type="{{field.type}}" class="form-control"                    placeholder="{{field.placeholder}}" id="{{field.name}}" ng-model="field.value">              <!--Create a dropdown field for dropdown attributes using dropdownOptions attribute-->             <select class="form-control" ng-if="field.type == \'dropdown\'" data-ng-model="field.value" data-ng-options="item for item in field.dropdownOptions">             </select>              <!--for datetime picker-->             <input ng-if="field.type == \'datetime\'" class="form-control" type="datetime-local" ng-model="field.value">          </div>     </form> </div>  <!--modal footer--> <div class="modal-footer">     <button type="submit" class="btn btn-primary" ng-click="ok(fields)">OK</button>     <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button> </div>',
                                 controller: 'AddModalInstanceController',
@@ -123,8 +129,8 @@
     /**
      * The per instance modal controller. This handles the actual submission of the data
      */
-    module.controller("AddModalInstanceController", ['$scope', '$modalInstance', '$http', '$state', '$injector', 'dataServiceName', 'ngModel', 'ModalService',
-        function ($scope, $modalInstance, $http, $state, $injector, dataServiceName, ngModel, ModalService) {
+    module.controller("AddModalInstanceController", ['$scope', '$uibModalInstance', '$http', '$state', '$injector', 'dataServiceName', 'ngModel', 'ModalService',
+        function ($scope, $uibModalInstance, $http, $state, $injector, dataServiceName, ngModel, ModalService) {
             // using service name to inject the service to our instance controller.
             var dataService = $injector.get(dataServiceName);
 
@@ -145,7 +151,7 @@
             $scope.title = $scope.settings['title'];
 
             $scope.cancel = function () {// when cancel button is clicked
-                $modalInstance.dismiss('cancel'); // this causes result promise to fail
+                $uibModalInstance.dismiss('cancel'); // this causes result promise to fail
             };
 
             $scope.ok = function (fields) { // when ok button is clicked
@@ -165,7 +171,7 @@
                         if ($scope.settings.hasOwnProperty('callback')) {
                             $scope.settings['callback'](newDataPoint); // fire off successful callback function
                         }
-                        $modalInstance.close(); // this causes result promise to succeed and modal to close and reset
+                        $uibModalInstance.close(); // this causes result promise to succeed and modal to close and reset
                     }
                 };
 
@@ -181,19 +187,21 @@
             };
 
             // MODAL PROMISE
-            $modalInstance.result.then(function (results) { // if successful submission
+            $uibModalInstance.result.then(function (results) { // if successful submission
                 $scope.fields = ModalService.resetModel(dataService.getModel()); // Reset modal
             }, function (err) { // if modal fails due to cancel or outside click
                 $scope.fields = ModalService.resetModel(dataService.getModel()); // Reset modal
             })
 
-
         }]);
 
+    // =======================================================
+    // service
+    // =======================================================
     module.service('ModalService', [function () {
         /**
          * Check that the model has the correct syntax for display
-         * This serves only as a basic compile. This will need to become far more complex and involved
+         * This serves only as a basic compile.
          * @param model
          */
         this.compileModel = function (model) {

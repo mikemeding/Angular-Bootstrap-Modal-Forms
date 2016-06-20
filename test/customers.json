@@ -1,0 +1,156 @@
+{
+  "status": "OK",
+  "version": 1.0,
+  "list": [
+    {
+      "id": 6,
+      "customerName": "4 Energy",
+      "active": true,
+      "street": "6637 Front Street",
+      "city": "North Anchorange",
+      "usState": "AK",
+      "email": "email@email.com",
+      "phone": "555-555-5555"
+    },
+    {
+      "id": 9,
+      "customerName": "Cara Donna",
+      "active": false,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "id": 14,
+      "customerName": "Colony Foods",
+      "active": true,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "id": 4,
+      "customerName": "Emerson",
+      "active": false,
+      "street": "6637 Front Street",
+      "city": "North Anchorange",
+      "usState": "AK",
+      "email": "email@email.com",
+      "phone": "555-555-5555"
+    },
+    {
+      "id": 8,
+      "customerName": "Magniture",
+      "active": true,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "id": 15,
+      "customerName": "MBTA",
+      "active": true,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "id": 10,
+      "customerName": "Ice Cream",
+      "active": false,
+      "street": "6637 Front Street",
+      "city": "North Anchorange",
+      "usState": "AK",
+      "email": "email@email.com",
+      "phone": "555-555-5555"
+    },
+    {
+      "id": 11,
+      "customerName": "Novartis",
+      "active": true,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "id": 1,
+      "customerName": "OutSmart Power Systems",
+      "active": true,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "id": 7,
+      "customerName": "Parker Hannifin",
+      "active": true,
+      "street": "6637 Front Street",
+      "city": "North Anchorange",
+      "usState": "AK",
+      "email": "email@email.com",
+      "phone": "555-555-5555"
+    },
+    {
+      "id": 5,
+      "customerName": "Progress Software",
+      "active": true,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "id": 13,
+      "customerName": "Roche Brothers",
+      "active": true,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "id": 2,
+      "customerName": "Stop and Shop",
+      "active": false,
+      "street": "6637 Front Street",
+      "city": "North Anchorange",
+      "usState": "AK",
+      "email": "email@email.com",
+      "phone": "555-555-5555"
+    },
+    {
+      "id": 12,
+      "customerName": "UTC",
+      "active": true,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "id": 16,
+      "customerName": "WCUPA",
+      "active": true,
+      "street": "7303 York Street",
+      "city": "Winchester",
+      "usState": "OH",
+      "email": "email@email.com",
+      "phone": "666-666-6666"
+    }
+  ]
+}

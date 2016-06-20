@@ -26,7 +26,7 @@
  * - initial beta version release
  */
 (function () {
-    var app = angular.module('eos');
+    var app = angular.module('autoModals');
     app.service('ModalService', [function () {
         /**
          * Check that the model has the correct syntax for display
@@ -35,7 +35,7 @@
          */
         this.compileModel = function (model) {
             var compileError = false;
-            for (x = 0; x < model['fields'].length; x++) {
+            for (var x = 0; x < model['fields'].length; x++) {
                 var field = model['fields'][x];  // shallow copy
                 // if dropdown = type then dropdownOptions must also exist and contain at least 1 value
                 if (field['type'] === 'dropdown' && !('dropdownOptions' in field)) { // if our type is a dropdown

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Quick and free Bootstrap stylesheet CDN -->
+    <link rel="stylesheet" href="bootstrap.css">
+
+    <style>
+        /*Bootstrap angular ui cursor hotfix*/
+        a,
+        td {
+            cursor: pointer;
+        }
+
+        th {
+            font-size: 1.2em;
+        }
+
+        #addData {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <!-- Javascript Libraries -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- ANBOMOFO library testing -->
+    <!--production-->
+    <!--<script src="../anbomofo.js"></script>-->
+    <script src="../anbomofo.min.js"></script>
+
+    <!--development-->
+    <!--<script src="../src/modalConfig.js"></script>-->
+    <!--<script src="../src/modalDirective.js"></script>-->
+    <!--<script src="../src/modalService.js"></script>-->
+
+    <!-- Bring all test scripts -->
+    <script src="testController.js"></script>
+    <script src="testDataService.js"></script>
+
+</head>
+
+<body ng-app="app" ng-controller="TestController" class="container-fluid">
+
+<h1>Angular Data Driven Modals</h1>
+<p> Click on the "Add Data" button to launch the add data modal. Click on a table row to launch an edit data modal.</p>
+<p> Further details, source code, and a detailed explanation can be found <a
+        href="https://github.com/mikemeding/Angular-Bootstrap-Modal-Forms" target="_blank"> here in my github repo.</a>
+</p>
+
+<!-- This launches our add modal -->
+<button id="addData" class="btn btn-primary" modal ng-service="TestDataService">Add Data</button>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Data Table</h3></div>
+    <div class="panel-body">
+
+        <!--Table-->
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Street Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Active</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <!-- The existance of ng-model here means that the modal is an edit modal using customer as its data-->
+            <tr modal ng-service="TestDataService" ng-model="customer" ng-repeat="customer in customers">
+                <td>{{customer.customerName}}</td>
+                <td>{{customer.street}}</td>
+                <td>{{customer.city}}</td>
+                <td>{{customer.usState}}</td>
+                <td>
+                    <input type="checkbox" ng-model="customer.active">
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</body>
+
+</html>
