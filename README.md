@@ -1,5 +1,5 @@
 # AnBoMoFo (Angular Bootstrap Modal Forms)
-A simple, ultra-lightweight AngularJS service which automatically generates data forms with callbacks using a simple JSON model.
+A simple, ultra-lightweight AngularJS service which automatically generates data forms and callbacks using a simple JSON model.
 
 # Live Example
 A basic plunker example of this library is now available <a href="http://embed.plnkr.co/ETaJ3W/preview" target="_blank">here</a>
